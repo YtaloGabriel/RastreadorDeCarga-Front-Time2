@@ -1,0 +1,22 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 50rem;
+  margin: 4rem auto;
+}
+
+.home h1 {
+  font-size: 3rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.home p {
+  text-align: justify;
+  background-color: var(--dark1);
+  padding: 2rem;
+  border-radius: .5rem;
+  box-shadow: 1px 1px 1rem rgba(0,0,0, .5);
+}
+
