@@ -1,0 +1,33 @@
+.dashboard {
+  flex: 1;
+}
+
+.tableContainer {
+  width: 100%;
+  max-width: 80rem;
+  margin: 3.5rem auto;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark2);
+}
+
+.table {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  width: 100%;
+  border-radius: .4rem;
+  box-shadow: 0 0 .5rem rgba(0,0,0, .07);
+}
+
+.table td, .table th {
+  text-align: center;
+  padding: .5rem 0;
+}
+
+.table th {
+  font-size: 1.1rem;
+  color: var(--dark2);
+}

@@ -1,28 +1,31 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AdmPanel from './components/AdmPanel/AdmPanel';
-import EventLogger from './components/EventLogger/EventLogger';
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import Home from './components/Home/Home';
+import Public from './components/Public/Public';
+import Logger from './components/Logger/Logger';
 
-import Footer from './components/Footer/Footer'
-import Header from './components/Header/Header'
-import Home from './components/Home/Home'
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import Cargo from './components/Admin/Cargo/Cargo';
 
 function App() {
 
   return (
-    <section className="App">
+    <main className="App">
       <BrowserRouter>
-        <Header/>
-        <main>
-          <Routes>
+        <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/admpanel" element={<AdmPanel />}/>
-          <Route path="/eventlogger" element={<EventLogger />}/>
-          </Routes>
-        </main>
-        <Footer />
+          <Route path="/public" element={<Public />}/>
+
+          {/* Admin Page Routes */}
+          <Route path="/admin" element={<Dashboard />}/>
+          <Route path="/admin/dashboard" element={<Dashboard />}/>
+          <Route path="/admin/cargo" element={<Cargo />}/>
+
+
+
+          <Route path="/logger" element={<Logger />}/>
+        </Routes>
       </BrowserRouter>
-    </section>
+    </main>
   )
 }
 
