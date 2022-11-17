@@ -7,8 +7,8 @@ const AdminNavbar = () => {
     <Navbar>
       <Link to="/admin/dashboard">Painel de Controle</Link>
       <Link to="/admin/cargo">Adicionar Carga</Link>
-      <Link to="/admin/dashboard">Rastrear Carga</Link>
-      <Link to="/admin/dashboard">Mapa de Cargas</Link>
+      <Link to="/admin/tracker">Rastrear Carga</Link>
+      <Link to="/admin/cargomap">Mapa de Cargas</Link>
     </Navbar>
   )
 }

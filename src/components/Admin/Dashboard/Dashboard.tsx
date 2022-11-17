@@ -2,14 +2,15 @@ import React from 'react'
 import styles from './Dashboard.module.css';
 
 import AdminNavbar from '../AdminNavbar/AdminNavbar'
+import Title from '../../GlobalComponents/Title/Title';
 
 const Dashboard = () => {
   return (
     <section className="content">
       <AdminNavbar/>
-      <section className={styles.dashboard}>
+      <section className="adminContent">
         <section className={styles.tableContainer}>
-          <h1 className={styles.title}>Cargas Encaminhadas</h1>
+          <Title>Cargas Encaminhadas</Title>
           
           <table className={styles.table}>
             <thead>
@@ -52,7 +53,7 @@ const Dashboard = () => {
         </section>
 
         <section className={styles.tableContainer}>
-          <h1 className={styles.title}>Cargas Não Encaminhadas</h1>
+        <Title>Cargas Não Encaminhadas</Title>
           
           <table className={styles.table}>
             <thead>
@@ -88,7 +89,7 @@ const Dashboard = () => {
 
 
         <section className={styles.tableContainer}>
-          <h1 className={styles.title}>Cargas Entregues</h1>
+        <Title>Cargas Entregues</Title>
           
           <table className={styles.table}>
             <thead>

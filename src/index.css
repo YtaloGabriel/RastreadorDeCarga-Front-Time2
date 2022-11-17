@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --white1: #F4F9FF;
+  --white1: #fff;
   --white2: #F0F0F0;
   --green: #44A682;
   --dark1: #191A21;
@@ -51,4 +51,12 @@ img {
   min-height: 100vh;
   background-color: var(--white2);
   color: var(--dark1);
+}
+
+.adminContent {
+  flex: 1;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
