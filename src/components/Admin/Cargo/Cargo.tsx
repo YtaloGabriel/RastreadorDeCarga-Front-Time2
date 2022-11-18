@@ -3,10 +3,6 @@ import Title from '../../GlobalComponents/Title/Title'
 import AdminNavbar from '../AdminNavbar/AdminNavbar'
 import styles from './Cargo.module.css'
 
-// Escolha a Origem
-// Escolha o Destino
-// Escolha a data limite
-
 const Cargo = () => {
   const sendForm = (event: any) => {
     event.preventDefault();

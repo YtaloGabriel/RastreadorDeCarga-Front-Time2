@@ -5,7 +5,7 @@ import Logger from './components/Logger/Logger';
 
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import Cargo from './components/Admin/Cargo/Cargo';
-import PublicTracker from './components/Admin/PublicTracker/PublicTracker';
+import PublicTracker from './components/Admin/AdminTracker/AdminTracker';
 import CargoMap from './components/Admin/CargoMap/CargoMap';
 
 function App() {

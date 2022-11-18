@@ -1,16 +1,17 @@
 import React from 'react'
+import TrackerPage from '../../GlobalComponents/TrackerPage/TrackerPage'
 import AdminNavbar from '../AdminNavbar/AdminNavbar'
-import styles from './PublicTracker.module.css'
+import styles from './AdminTracker.module.css'
 
-const PublicTracker = () => {
+const AdminTracker = () => {
   return (
     <section className="content">
       <AdminNavbar />
       <section className="adminContent">
-        PublicTracker
+        <TrackerPage />
       </section>
     </section>
   )
 }
 
-export default PublicTracker
+export default AdminTracker
