@@ -13,6 +13,26 @@ const TrackerPage = () => {
 
   const cargoFormatedDate = apiData?.data_entrega && moment(apiData?.data_entrega).format(`DD/MM/YYYY`);
 
+  // Temporary illustrative data from cargo historic by API
+  const historicTracker = [
+    {
+      date: '25/03/2022',
+      harbor: 'Porto de Maceió - AL'
+    },
+    {
+      date: '24/03/2022',
+      harbor: 'Porto de Recife - PE'
+    },
+    {
+      date: '23/03/2022',
+      harbor: 'Porto de Fortaleza - CE'
+    },
+    {
+      date: '22/03/2022',
+      harbor: 'Porto de Natal - RN'
+    },
+  ]
+
   interface CargoData {
     cod_carga: string;
     data_entrega: string;
@@ -62,24 +82,31 @@ const TrackerPage = () => {
   }
 
   const CargoDetailsComponent = () => {
+    const currentLocation = historicTracker[0]?.harbor;
+
     return (
       <>
         <section className={styles.details}>
             <Title>Informações do Pedido</Title>
             
             <div className={styles.cargoInfo}>
-              <span className={styles.cargoLocal}>A carga <strong>{apiData?.cod_carga}</strong> está em <strong>Localização atual **</strong></span>
+              <span className={styles.cargoLocal}>A carga <strong>{apiData?.cod_carga}</strong> está no <strong>{currentLocation}</strong></span>
               
               <span className={styles.cargoDeadline}>O prazo para a entrega em <strong>{apiData?.destino}</strong> é: {cargoFormatedDate}</span>
             </div>
             
             <Title>Linha do Tempo</Title>
+              
             <ul className={styles.shipSteps}>
-              <li className={styles.step}>
-                <div className={styles.stepDate}>25/11/2022</div>
-                <div className={styles.stepStatus}></div>
-                <div className={styles.stepInfo}>Pedido recebido no porto de Santos - SP</div>
-              </li>
+              {historicTracker?.map((item, index) => {
+                return (
+                    <li key={`historicItem${index}`} className={styles.step}>
+                    <div className={styles.stepDate}>{item.date}</div>
+                    <div className={styles.stepStatus}></div>
+                    <div className={styles.stepInfo}>Pedido recebido no {item.harbor}</div>
+                  </li>
+                )
+              })}
             </ul>
           </section>
       </>

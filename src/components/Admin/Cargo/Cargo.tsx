@@ -1,6 +1,5 @@
 import React, { SyntheticEvent } from 'react'
 import api from '../../../../services/api'
-import Loader from '../../GlobalComponents/Loader/Loader'
 import Title from '../../GlobalComponents/Title/Title'
 import AdminNavbar from '../AdminNavbar/AdminNavbar'
 import styles from './Cargo.module.css'
@@ -84,6 +83,7 @@ const Cargo = () => {
             <span>Escolha a data limite para a entrega</span>
             <input type="date" className={styles.date} ref={inputDate} required/>
           </label>
+
           <button className={styles.sendButton}>
             {loading ? 'Cadastrando...' : 'Cadastrar Carga'}
           </button>
