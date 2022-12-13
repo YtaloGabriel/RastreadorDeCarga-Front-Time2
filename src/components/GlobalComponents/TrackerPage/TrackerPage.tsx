@@ -10,6 +10,7 @@ const TrackerPage = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [apiData, setApiData] = React.useState<CargoData | null>(null);
   const inputCargo = React.useRef<any>(null);
+
   const cargoFormatedDate = apiData?.data_entrega && moment(apiData?.data_entrega).format(`DD/MM/YYYY`);
 
   interface CargoData {
@@ -26,7 +27,7 @@ const TrackerPage = () => {
       setLoading(true);
       setApiData(null);
       setError(null)
-      
+
       api.get(`?codigo=${value}`)
       .then((response) => {
         if (response.status === 200) {
@@ -84,14 +85,14 @@ const TrackerPage = () => {
       </>
     )
   }
-
+  
   return (
     <section className={styles.public}>
-          <SearchFormComponent />
-          {loading && <Loader />}
-          {error && <span>{error}</span>}
-          {apiData && <CargoDetailsComponent />}
-      </section>
+        <SearchFormComponent />
+        {loading && <Loader />}
+        {error && <span>{error}</span>}
+        {apiData && <CargoDetailsComponent />}
+    </section>
   )
 }
 
