@@ -1,0 +1,15 @@
+.loader {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: .4rem solid rgba(0, 0, 0, .15);
+  border-top-color: var(--dark2);
+  animation: loading .5s linear infinite;
+}
+
+@keyframes loading {
+  to {
+    rotate: 360deg;
+  }
+}
