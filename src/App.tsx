@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Home from './components/Home/Home';
-import Public from './components/Public/Public';
+import Public from './components/PublicPage/Public';
 import Logger from './components/Logger/Logger';
 
 import Dashboard from './components/Admin/Dashboard/Dashboard';

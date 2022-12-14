@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './TrackerPage.module.css'
-import Title from '../Title/Title'
+import Title from '../../GlobalComponents/Title/Title'
 import api from '../../../../services/api.js';
 import moment from 'moment'
-import Loader from '../Loader/Loader';
+import Loader from '../../GlobalComponents/Loader/Loader';
 
 const TrackerPage = () => {
   const [error, setError] = React.useState<string | null>(null)

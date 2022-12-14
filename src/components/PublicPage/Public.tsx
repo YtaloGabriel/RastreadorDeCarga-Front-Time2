@@ -1,5 +1,5 @@
 import React from 'react';
-import TrackerPage from '../GlobalComponents/TrackerPage/TrackerPage';
+import TrackerPage from '../GlobalPages/TrackerPage/TrackerPage';
 import styles from './Public.module.css'
 
 const Public = () => {
