@@ -48,7 +48,7 @@ const TrackerPage = () => {
       setApiData(null);
       setError(null)
 
-      api.get(`?codigo=${value}`)
+      api.get(`/cargos?codigo=${value}`)
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
