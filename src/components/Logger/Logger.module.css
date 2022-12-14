@@ -1,7 +1,14 @@
-.cargo {
+.loggerContainer {
+  width: 100%;
+  max-width: 40rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.form {
   display: flex;
   width: 100%;
-  max-width: 50rem;
   margin: 0 auto;
   flex-direction: column;
 }
@@ -26,18 +33,14 @@
   margin-bottom: .5rem;
 }
 
-.select, .date {
+.select {
   background-color: var(--white2);
   height: 2.5rem;
   padding: 0 1rem;
+  max-width: 100%;
   border-radius: .2rem;
   border: 1px solid rgb(228, 228, 228);
   color: var(--dark1);
-}
-
-.date::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(0) brightness(0) sepia(0) saturate(0);
 }
 
 .sendButton {
@@ -58,4 +61,31 @@
 
 .sendButton:active {
   transform: translateY(.1rem);
+}
+
+@media screen and (max-width: 600px) {
+  .loggerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .inputs {
+    margin-top: 1rem;
+    padding: 2rem;
+  }
+
+  .label > span {
+    font-size: 1rem;
+  }
+
+  .select {
+    height: 3rem;
+    font-size: 1.2rem;
+  }
+
+  .sendButton {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }
