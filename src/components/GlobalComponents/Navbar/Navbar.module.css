@@ -9,12 +9,12 @@
 }
 
 .logo {
-  max-width: 12rem;
+  max-width: 6rem;
 }
 
 .title {
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .title > span {
@@ -24,14 +24,14 @@
 .nav {
   display: flex;
   background-color: var(--dark1);
-  width: 20rem;
+  width: 16rem;
   min-height: 100vh;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .nav > a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }

@@ -8,7 +8,7 @@
 }
 
 .link > img {
-  max-width: 1.8rem;
+  max-width: 1.6rem;
 }
 
 .link:hover {
@@ -22,7 +22,7 @@
   border-radius: 50%;
   background-color: var(--blue);
   position: absolute;
-  left: 1.7rem;
+  left: 0.7rem;
   display: none;
 }
 
