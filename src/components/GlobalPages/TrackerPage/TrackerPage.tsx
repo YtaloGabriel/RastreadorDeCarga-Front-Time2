@@ -13,26 +13,6 @@ const TrackerPage = () => {
 
   const cargoFormatedDate = apiData?.data_entrega && moment(apiData?.data_entrega).format(`DD/MM/YYYY`);
 
-  // Temporary illustrative data from cargo historic by API
-  const historicTracker = [
-    {
-      date: '25/03/2022',
-      harbor: 'Porto de Maceió - AL'
-    },
-    {
-      date: '24/03/2022',
-      harbor: 'Porto de Recife - PE'
-    },
-    {
-      date: '23/03/2022',
-      harbor: 'Porto de Fortaleza - CE'
-    },
-    {
-      date: '22/03/2022',
-      harbor: 'Porto de Natal - RN'
-    },
-  ]
-
   interface CargoData {
     cod_carga: string;
     data_entrega: string;
@@ -40,6 +20,12 @@ const TrackerPage = () => {
     id_carga: number;
     origem: string;
     status: Array<object>;
+    historico: [
+      {
+        localizacao: string;
+        data_modificacao: string;
+      }
+    ]
   }
 
   const getApiData = async(value: string) => {
@@ -82,7 +68,8 @@ const TrackerPage = () => {
   }
 
   const CargoDetailsComponent = () => {
-    const currentLocation = historicTracker[0]?.harbor;
+    const currentLocation = apiData?.historico[0];
+    const timeLineList = apiData?.historico;
 
     return (
       <>
@@ -90,7 +77,7 @@ const TrackerPage = () => {
             <Title>Informações do Pedido</Title>
             
             <div className={styles.cargoInfo}>
-              <span className={styles.cargoLocal}>A carga <strong>{(apiData?.cod_carga)?.toUpperCase()}</strong> está no <strong>{currentLocation}</strong></span>
+              <span className={styles.cargoLocal}>A carga <strong>{(apiData?.cod_carga)?.toUpperCase()}</strong> está no <strong>{currentLocation?.localizacao}</strong></span>
               
               <span className={styles.cargoDeadline}>O prazo para a entrega em <strong>{apiData?.destino}</strong> é: {(cargoFormatedDate)}</span>
             </div>
@@ -98,12 +85,12 @@ const TrackerPage = () => {
             <Title>Linha do Tempo</Title>
               
             <ul className={styles.shipSteps}>
-              {historicTracker?.map((item, index) => {
+              {timeLineList?.map((item, index) => {
                 return (
                     <li key={`historicItem${index}`} className={styles.step}>
-                    <div className={styles.stepDate}>{item.date}</div>
+                    <div className={styles.stepDate}>{item.data_modificacao}</div>
                     <div className={styles.stepStatus}></div>
-                    <div className={styles.stepInfo}>Pedido recebido no {item.harbor}</div>
+                    <div className={styles.stepInfo}>Pedido recebido no {item.localizacao}</div>
                   </li>
                 )
               })}
