@@ -18,6 +18,7 @@ const Cargo = () => {
     origem: string;
     destino: string;
     data_entrega: string;
+    status: string;
   };
 
   interface PortsList {
@@ -32,11 +33,12 @@ const Cargo = () => {
   }, []);
 
   // Send data to the server
-  const sendData = (origin: string, destiny: string, date: string) => {
+  const sendData = (origin: string, destiny: string, date: string, status: string) => {
     const cargoData: CargoPost = {
       origem: origin,
       destino: destiny,
-      data_entrega: date
+      data_entrega: date,
+      status
     };
 
     const headerPostConfig = { headers: { 'Content-type': 'application/json'} };
@@ -62,6 +64,7 @@ const Cargo = () => {
     const originValue = inputOrigin.current?.value;
     const destinyValue = inputDestiny.current?.value;
     const dateValue = inputDate.current?.value;
+    const statusValue = 'não encaminhada';
 
     const selectedDate = dateValue && new Date(dateValue);
 
@@ -72,7 +75,7 @@ const Cargo = () => {
         return setAlert('Erro: A data de entrega não pode ser menor ou igual a atual')
       }
 
-      return sendData(originValue, destinyValue, dateValue);
+      return sendData(originValue, destinyValue, dateValue, statusValue);
     }
 
     return null;
