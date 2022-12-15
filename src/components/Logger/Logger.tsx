@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react'
 import api from '../../../services/api';
 import Title from '../GlobalComponents/Title/Title';
@@ -6,9 +7,12 @@ import styles from './Logger.module.css';
 const Logger = () => {
   const [portData, setPortData] = React.useState<[] | null>(null);
   const [cargoData, setCargoData] = React.useState<[] | null>(null);
+  const [message, setMessage] = React.useState<string | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const selectCargo = React.useRef<HTMLSelectElement>(null)
   const selectPort = React.useRef<HTMLSelectElement>(null)
+  const selectStatus = React.useRef<HTMLSelectElement>(null)
 
   interface PortsList {
     id_porto: number;
@@ -20,22 +24,6 @@ const Logger = () => {
     cod_carga: string;
   }
 
-  // interface CargoHistoric {
-  //   localizacao: string;
-  //   data_modificacao: string;
-  // }
-
-  // interface CargosList {
-  //   id_carga: number;
-  //   cod_carga: string;
-  //   origem: string;
-  //   destino: string;
-  //   status: string;
-  //   data_entrega: string;
-  //   historico: CargoHistoric[];
-  // }
-
-  // Getting cargos and ports api data
   React.useEffect(() => {
     api.get('/cargos')
       .then(({data}) => setCargoData(data))
@@ -46,11 +34,59 @@ const Logger = () => {
       .catch((err) => console.error(err));
   }, []);
 
+  interface InputData {
+    codigo: string | undefined;
+    localizacao: string | undefined;
+    status: string | undefined;
+    data_modificacao: string;
+  }
+
+  
+  // Function to update the cargo data
+  const updateCargo = (data: InputData) => {
+    const patchHeaderConfig = { headers: { 'Content-type': 'application/json'} };
+
+    setMessage(null);
+    setLoading(true);
+
+    api.patch('/cargos', data, patchHeaderConfig)
+      .then(response => {
+        if (response.status === 200) {
+          setMessage(response.data.message);
+          setLoading(false);
+        } else {
+          setMessage('Erro: Não conseguimos atualizar a carga')
+          setLoading(false);
+        }
+
+        return null;
+      })
+      .catch((error) => {
+        setMessage('Ops! Algo deu errado.');
+        setLoading(false);
+        console.error(error)
+      });
+  }
+
+  // get inputs data
   const sendForm = (event: any) => {
     event.preventDefault();
 
     const codeValue = selectCargo.current?.value;
     const portValue = selectPort.current?.value;
+    const statusValue = selectStatus.current?.value;
+    const currentDate = moment(new Date()).format(`DD/MM/YYYY`);
+
+    const inputValues: InputData = {
+      localizacao: portValue,
+      status: statusValue,
+      data_modificacao: currentDate,
+      codigo: codeValue
+    };
+
+    if (inputValues.codigo && inputValues.localizacao) {
+      return updateCargo(inputValues);
+    }
 
     return null;
   };
@@ -86,9 +122,20 @@ const Logger = () => {
             </select>
           </label>
 
-          <button className={styles.sendButton}>Enviar Atualização</button>
+          <label className={styles.label}>
+            <span>Escolha o status da carga</span>
+            <select className={styles.select} ref={selectStatus}>
+              <option value="não encaminhada">Não Encaminhada</option>
+              <option value="a caminho">A caminho</option>
+              <option value="entregue">Entregue</option>
+            </select>
+          </label>
 
+          <button className={styles.sendButton}>{loading ? 'Enviando...' : 'Enviar Atualização'}</button>
+          
           </div>
+
+          {message && <span>{message}</span>}
         </form>
       </section>
     </section>
