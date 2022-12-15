@@ -65,7 +65,7 @@ const TrackerPage = () => {
   const submitForm = (event: any) => {
     event.preventDefault();
 
-    getApiData(String(inputCargo?.current.value))
+    getApiData(String(inputCargo?.current.value).toLowerCase())
   }
 
   const SearchFormComponent = () => {
@@ -90,9 +90,9 @@ const TrackerPage = () => {
             <Title>Informações do Pedido</Title>
             
             <div className={styles.cargoInfo}>
-              <span className={styles.cargoLocal}>A carga <strong>{apiData?.cod_carga}</strong> está no <strong>{currentLocation}</strong></span>
+              <span className={styles.cargoLocal}>A carga <strong>{(apiData?.cod_carga)?.toUpperCase()}</strong> está no <strong>{currentLocation}</strong></span>
               
-              <span className={styles.cargoDeadline}>O prazo para a entrega em <strong>{apiData?.destino}</strong> é: {cargoFormatedDate}</span>
+              <span className={styles.cargoDeadline}>O prazo para a entrega em <strong>{apiData?.destino}</strong> é: {(cargoFormatedDate)}</span>
             </div>
             
             <Title>Linha do Tempo</Title>

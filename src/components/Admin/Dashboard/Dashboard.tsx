@@ -6,6 +6,7 @@ import AdminNavbar from '../AdminNavbar/AdminNavbar'
 import Title from '../../GlobalComponents/Title/Title';
 import api from '../../../../services/api';
 import Loader from '../../GlobalComponents/Loader/Loader';
+import CargoMap from '../CargoMap/CargoMap';
 
 const Dashboard = () => {
   const [cargosData, setCargosData] = React.useState<[] | null>(null);
@@ -19,6 +20,11 @@ const Dashboard = () => {
     destino: string;
     status: string;
     data_entrega: string;
+  }
+
+  interface CargoHistoric {
+    localizacao: string;
+    data_modificacao: string;
   }
 
   React.useEffect(() => {
@@ -54,18 +60,16 @@ const Dashboard = () => {
                 <th>Código</th>
                 <th>Origem</th>
                 <th>Destino</th>
-                <th>Última Localização</th>
                 <th>Data Limite</th>
               </tr>
             </thead>
             <tbody>
-              {forwardedCargos?.map((cargo: Cargo) => {
+              {forwardedCargos?.map((cargo: Cargo, id) => {
                 return (
-                  <tr>
+                  <tr key={`forwarded${id}`}>
                     <td>{(cargo.cod_carga).toUpperCase()}</td>
                     <td>{cargo.origem}</td>
                     <td>{cargo.destino}</td>
-                    <td>Porto de Rio de Janeiro - RJ</td>
                     <td>{moment(cargo.data_entrega).format(`DD/MM/YYYY`)}</td>
                   </tr>
                 )
@@ -87,9 +91,9 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {notForwardedCargos?.map((cargo: Cargo) => {
+              {notForwardedCargos?.map((cargo: Cargo, id) => {
                 return (
-                  <tr>
+                  <tr key={`notForwarded${id}`}>
                     <td>{(cargo.cod_carga).toUpperCase()}</td>
                     <td>{cargo.origem}</td>
                     <td>{cargo.destino}</td>
@@ -115,9 +119,9 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {deliveredCargos?.map((cargo: Cargo) => {
+              {deliveredCargos?.map((cargo: Cargo, id) => {
                 return (
-                  <tr>
+                  <tr key={`delivered${id}`}>
                     <td>{(cargo.cod_carga).toUpperCase()}</td>
                     <td>{cargo.origem}</td>
                     <td>{cargo.destino}</td>
