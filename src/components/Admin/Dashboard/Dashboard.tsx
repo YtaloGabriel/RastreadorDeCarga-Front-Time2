@@ -4,9 +4,10 @@ import moment from 'moment';
 
 import AdminNavbar from '../AdminNavbar/AdminNavbar'
 import Title from '../../GlobalComponents/Title/Title';
+import api from '../../../../services/api';
 
 const Dashboard = () => {
-  const [cargoData, setCargoData] = React.useState<Cargo | null>(null);
+  const [cargosData, setCargosData] = React.useState<[] | null>(null);
 
   interface Cargo {
     id_carga: number;
@@ -17,77 +18,16 @@ const Dashboard = () => {
     data_entrega: string;
   }
 
-  const illustrativeData = [
-    {
-      id_carga: 1,
-      cod_carga: 'kjs094',
-      origem: 'Porto de Vitória - ES',
-      destino: 'Porto de Recife - PE',
-      status: 'não encaminhada',
-      data_entrega: '2022-01-12'
-    },
-    {
-      id_carga: 2,
-      cod_carga: 'asd341',
-      origem: 'Porto de Cabedelo - PB',
-      destino: 'Porto de Santos - SP',
-      status: 'a caminho',
-      data_entrega: '2022-04-01'
-    },
-    {
-      id_carga: 3,
-      cod_carga: 'eas974',
-      origem: 'Porto de Paranaguá - PR',
-      destino: 'Porto de Santos - SP',
-      status: 'entregue',
-      data_entrega: '2022-10-12'
-    },
-    {
-      id_carga: 4,
-      cod_carga: 'por345',
-      origem: 'Porto de Santana - AP',
-      destino: 'Porto de Manaus - AM',
-      status: 'entregue',
-      data_entrega: '2022-01-17'
-    },
-    {
-      id_carga: 5,
-      cod_carga: 'euv131',
-      origem: 'Porto do Rio de Janeiro - RJ',
-      destino: 'Porto de Maceió - AL',
-      status: 'não encaminhada',
-      data_entrega: '2022-01-13'
-    },
-    {
-      id_carga: 6,
-      cod_carga: 'aci888',
-      origem: 'Porto de Natal - RN',
-      destino: 'Porto de Fortaleza - CE',
-      status: 'não encaminhada',
-      data_entrega: '2022-01-12'
-    },
-    {
-      id_carga: 7,
-      cod_carga: 'abc123',
-      origem: 'Porto de Rio Grande - RS',
-      destino: 'Porto de Santana - AP',
-      status: 'a caminho',
-      data_entrega: '2023-11-02'
-    },
-    {
-      id_carga: 8,
-      cod_carga: 'eao923',
-      origem: 'Porto de Rio Grande - RS',
-      destino: 'Porto de Santana - AP',
-      status: 'entregue',
-      data_entrega: '2022-01-13'
-    },
-  ]
+  React.useEffect(() => {
+    api.get('/cargos')
+      .then(({data}) => setCargosData(data))
+      .catch((error) => console.error(error));
+  }, [])
 
   // Cargos filtered by shipping
-  const deliveredCargos = illustrativeData.filter(cargo => cargo.status === 'entregue');
-  const forwardedCargos = illustrativeData.filter(cargo => cargo.status === 'a caminho');
-  const notForwardedCargos = illustrativeData.filter(cargo => cargo.status === 'não encaminhada');
+  const deliveredCargos = cargosData?.filter((cargo: Cargo) => cargo.status === 'entregue');
+  const forwardedCargos = cargosData?.filter((cargo: Cargo) => cargo.status === 'a caminho');
+  const notForwardedCargos = cargosData?.filter((cargo: Cargo) => cargo.status === 'não encaminhada');
 
 
   return (

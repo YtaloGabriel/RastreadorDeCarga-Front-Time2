@@ -24,7 +24,7 @@ const Cargo = () => {
   interface PortsList {
     id_porto: number;
     nome_porto: string;
-  }
+  };
 
   React.useEffect(() => {
     api.get('/portos')
@@ -45,6 +45,7 @@ const Cargo = () => {
   
     // Send post requisition to API
     setLoading(true);
+
     api.post('/cargos', cargoData, headerPostConfig)
       .then(() => {
         setLoading(false);
@@ -52,7 +53,7 @@ const Cargo = () => {
       })
       .catch(err => {
         setLoading(false);
-        throw new Error(err.alert);
+        console.error(err);
       });
   }
 
