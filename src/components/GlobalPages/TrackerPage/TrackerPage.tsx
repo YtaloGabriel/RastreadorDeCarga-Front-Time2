@@ -77,24 +77,27 @@ const TrackerPage = () => {
             <Title>Informações do Pedido</Title>
             
             <div className={styles.cargoInfo}>
-              <span className={styles.cargoLocal}>A carga <strong>{(apiData?.cod_carga)?.toUpperCase()}</strong> está no <strong>{currentLocation?.localizacao}</strong></span>
+              <span className={styles.cargoLocal}>A carga <strong>{(apiData?.cod_carga)?.toUpperCase()}</strong> está no <strong>{currentLocation?.localizacao ? currentLocation?.localizacao : 'local de origem.'}</strong></span>
               
               <span className={styles.cargoDeadline}>O prazo para a entrega em <strong>{apiData?.destino}</strong> é: {(cargoFormatedDate)}</span>
             </div>
             
-            <Title>Linha do Tempo</Title>
+
+            {Boolean(timeLineList?.length) && <>
+              <Title>Linha do Tempo</Title>
               
-            <ul className={styles.shipSteps}>
-              {timeLineList?.map((item, index) => {
-                return (
-                    <li key={`historicItem${index}`} className={styles.step}>
-                    <div className={styles.stepDate}>{item.data_modificacao}</div>
-                    <div className={styles.stepStatus}></div>
-                    <div className={styles.stepInfo}>Pedido recebido no {item.localizacao}</div>
-                  </li>
-                )
-              })}
-            </ul>
+              <ul className={styles.shipSteps}>
+                {timeLineList?.map((item, index) => {
+                  return (
+                      <li key={`historicItem${index}`} className={styles.step}>
+                      <div className={styles.stepDate}>{item.data_modificacao}</div>
+                      <div className={styles.stepStatus}></div>
+                      <div className={styles.stepInfo}>Pedido recebido no {item.localizacao}</div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </>}
           </section>
       </>
     )
