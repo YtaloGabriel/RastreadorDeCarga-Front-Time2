@@ -5,9 +5,12 @@ import moment from 'moment';
 import AdminNavbar from '../AdminNavbar/AdminNavbar'
 import Title from '../../GlobalComponents/Title/Title';
 import api from '../../../../services/api';
+import Loader from '../../GlobalComponents/Loader/Loader';
 
 const Dashboard = () => {
   const [cargosData, setCargosData] = React.useState<[] | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string | null>(null);
 
   interface Cargo {
     id_carga: number;
@@ -19,9 +22,18 @@ const Dashboard = () => {
   }
 
   React.useEffect(() => {
+    setError(null);
+    setLoading(true);
+
     api.get('/cargos')
-      .then(({data}) => setCargosData(data))
-      .catch((error) => console.error(error));
+      .then(({data}) => {
+        setLoading(false);
+        setCargosData(data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError('Ops! Algo deu errado.');
+      });
   }, [])
 
   // Cargos filtered by shipping
@@ -30,10 +42,9 @@ const Dashboard = () => {
   const notForwardedCargos = cargosData?.filter((cargo: Cargo) => cargo.status === 'não encaminhada');
 
 
-  return (
-    <section className="content">
-      <AdminNavbar/>
-      <section className="adminContent">
+  const AdminContent = () => {
+    return (
+      <>
         <section className={styles.tableContainer}>
           <Title>Cargas Encaminhadas</Title>
           
@@ -117,6 +128,16 @@ const Dashboard = () => {
             </tbody>
           </table>
         </section>
+      </>
+    )
+  }
+
+  return (
+    <section className="content">
+      <AdminNavbar/>
+      <section className="adminContent">
+        {(loading && !error) ? <Loader/> : <AdminContent />}
+        {error && <span>{error}</span>}
       </section>
     </section>
   )
